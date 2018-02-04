@@ -1,0 +1,9 @@
+<div class="container">
+  <h1>Login</h1>
+  <form action="/profile" method="GET">
+    <input [(ngModel)]="username" type="text" class="form-control" placeholder="username">
+    <input [(ngModel)]="password" type="password" class="form-control" placeholder="password">
+    <button class="btn btn-primary btn-block" (click)="login(username, password)">Submit!</button>
+  </form>
+  
+</div>
