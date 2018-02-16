@@ -1,0 +1,83 @@
+<nav class="navbar navbar-fixed-top navbar-light bg-primary">
+  <div class="col-xs-5 hidden-xs">
+    <div class="navbar-text pull-left">
+      <a [routerLink]="['/#']" class="navbar-link text-white">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+    </div>
+
+    <div class="text-white navbar-brand font-weight-bold" [routerLink]="['/#']">
+      Websites
+    </div>
+    <a [routerLink]="['/#']" class="navbar-link navbar-text pull-right text-white">
+      <span class="glyphicon glyphicon-plus"></span>
+    </a>
+
+  </div>
+  <div class="col-xs-7">
+    <div class="navbar-text pull-left visible-xs">
+      <a [routerLink]="['/#']" class="navbar-link text-white">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+    </div>
+
+    <div class="text-white navbar-brand font-weight-bold" [routerLink]="['/#']">
+      Edit Website
+    </div>
+    <a [routerLink]="website-list.html" class="navbar-link navbar-text pull-right text-white">
+      <span class="glyphicon glyphicon-ok"></span>
+    </a>
+
+  </div>
+</nav>
+
+<div class="col-xs-4 hidden-xs cl-body-padding cl-full-height">
+  <div class="row extra-padding">
+    <a class="cl-left-padding" [routerLink]="['/page-list']">Blogging App</a>
+    <a class="pull-right" [routerLink]="['/website-edit']">
+      <i class="glyphicon glyphicon-cog text-primary right-padding"></i>
+    </a>
+  </div>
+  <div class="row extra-padding">
+    <a class="cl-left-padding" [routerLink]="['/page-list']">Address Book App</a>
+    <a class="pull-right" [routerLink]="['/website-edit']">
+      <i class="glyphicon glyphicon-cog text-primary right-padding"></i>
+    </a>
+  </div>
+  <div class="row extra-padding">
+    <a class="cl-left-padding" [routerLink]="['/page-list']">Script Testing App</a>
+    <a class="pull-right" [routerLink]="['/website-edit']">
+      <i class="glyphicon glyphicon-cog text-primary right-padding"></i>
+    </a>
+  </div>
+  <div class="row extra-padding">
+    <a class="cl-left-padding" [routerLink]="['/page-list']">Blogger</a>
+    <a class="pull-right" [routerLink]="['/website-edit']">
+      <i class="glyphicon glyphicon-cog text-primary right-padding"></i>
+    </a>
+  </div>
+</div>
+
+<div class="col-xs-1 hidden-xs cl-full-height cl-right-divider"></div>
+
+<div class="col-xs-7 cl-body-padding">
+  <form>
+    <div class="form-group">
+      <label for="website-name">Name</label>
+      <input [(ngModel)]="name" type="text" class="form-control" id="website-name" value="Blogger" placeholder="Name">
+    </div>
+    <div class="form-group">
+      <label for="website-description">Description</label>
+      <textarea [(ngModel)]="description" id="website-description" class="form-control" rows="5" placeholder="Description">Blog is a blog-publishing service.</textarea>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-block btn-danger">Delete</button>
+    </div>
+  </form>
+</div>
+
+<nav class="navbar navbar-fixed-bottom navbar-light bg-primary">
+  <a class="navbar-brand pull-right" [routerLink]="['/profile']">
+    <i class="glyphicon glyphicon-user text-white"></i>
+  </a>
+</nav>
