@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { WidgetService } from '../../../../services/widget.service.client';
+import { Widget } from '../../../../models/widget.model.client';
 
 @Component({
   selector: 'app-widget-image',
@@ -11,30 +12,42 @@ import { WidgetService } from '../../../../services/widget.service.client';
 export class WidgetImageComponent implements OnInit {
 
   // properties
-  widgetId: String;
-  widget: {};
-  widgetType: String;
+  widget: Widget = {
+    _id: "", widgetType: "", pageId: "", size: "", text: "", url: "", width: ""
+  };
+  userId: String;
+  websiteId: String;
   pageId: String;
-  width: String;
-  url: String;
+  widgetId: String;
 
-  constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private widgetService: WidgetService, 
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       (params: any) => {
-        this.widgetId = params['widgetId'];
-        this.pageId = params['pageId'];
+        this.widgetId = params['wgid'];
+        this.pageId = params['pid'];
+        this.userId = params['uid'];
+        this.websiteId = params['wid'];
       }
     );
 
     this.widget = this.widgetService.findWidgetById(this.widgetId);
-    if (this.pageId !== this.widget['pageId']) {
-      alert('Page Id does not match!');
-    }
-    this.widgetType = this.widget['widgetType'];
-    this.width = this.widget['width'];
-    this.url = this.widget['url'];
   }
 
+  updateWidget(widget: Widget) {
+    this.widgetService.updateWidget(widget._id, widget);
+    let url: any = "/user/" + this.userId + "/website/" + this.websiteId + "/page/" + this.pageId + "/widget";
+    this.router.navigate([url]);
+  }
+
+  deleteWidget() {
+    this.widgetService.deleteWidget(this.widgetId);
+    let url: any = "/user/" + this.userId + "/website/" + this.websiteId + "/page/" + this.pageId + "/widget";
+    this.router.navigate([url]);
+  }
 }

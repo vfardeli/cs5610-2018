@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { WidgetService } from '../../../services/widget.service.client';
+import { Widget } from '../../../models/widget.model.client';
 
 @Component({
   selector: 'app-widget-list',
@@ -10,19 +12,30 @@ import { WidgetService } from '../../../services/widget.service.client';
 })
 export class WidgetListComponent implements OnInit {
 
+  userId: String;
+  websiteId: String;
   pageId: String;
-  widgets: any = [];
+  widgets: Widget[];
 
-  constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private widgetService: WidgetService, 
+    private activatedRoute: ActivatedRoute,
+    private sanitizer: DomSanitizer
+  ) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       (params: any) => {
-        this.pageId = params['pageId'];
+        this.userId = params['uid'];
+        this.websiteId = params['uid'];
+        this.pageId = params['pid'];
       }
     );
 
     this.widgets = this.widgetService.findWidgetsByPageId(this.pageId);
   }
 
+  photoURL(url) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
 }

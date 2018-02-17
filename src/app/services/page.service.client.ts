@@ -3,6 +3,7 @@ import { Http, RequestOptions, Response } from '@angular/http';
 import 'rxjs/Rx';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
+import { Page } from '../models/page.model.client';
 
 // import { Page } from '../models/page.model.client';
 
@@ -11,10 +12,10 @@ export class PageService {
 
     constructor() { }
 
-    pages = [
-        { _id: "321", name: "Post 1", websiteId: "456", description: "Lorem" },
-        { _id: "432", name: "Post 2", websiteId: "456", description: "Lorem" },
-        { _id: "543", name: "Post 3", websiteId: "456", description: "Lorem" }
+    pages: Page[] = [
+        { _id: "321", name: "Post 1", websiteId: "456", title: "Lorem" },
+        { _id: "432", name: "Post 2", websiteId: "456", title: "Lorem" },
+        { _id: "543", name: "Post 3", websiteId: "456", title: "Lorem" }
     ];
 
     api = {
@@ -26,17 +27,19 @@ export class PageService {
     };
 
     createPage(websiteId: String, page: any) {
-        page._id = Math.random();
+        page._id = Math.random().toString();
         page.websiteId = websiteId;
         this.pages.push(page);
     }
 
     findPageByWebsiteId(websiteId: String) {
+        const resultSet = [];
         for (let x = 0; x < this.pages.length; x++) {
             if (this.pages[x].websiteId === websiteId) {
-                return this.pages[x];
+                resultSet.push(this.pages[x]);
             }
         }
+        return resultSet;
     }
 
     findPageById(pageId: String) {
@@ -51,7 +54,7 @@ export class PageService {
         for (let x = 0; x < this.pages.length; x++) {
             if (this.pages[x]._id === pageId) {
                 this.pages[x].name = page.name;
-                this.pages[x].description = page.description;
+                this.pages[x].title = page.title;
             }
         }
     }

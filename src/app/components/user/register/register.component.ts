@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { UserService } from '../../../services/user.service.client';
+import { User } from '../../../models/user.model.client';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ export class RegisterComponent implements OnInit {
 
   @ViewChild('f') registerForm: NgForm;
 
-  user: any = {_id:"", username: "", password: ""};
+  user: User = {_id:"", username: "", password: "", firstName: "", lastName: ""};
   username: String;
   password: String;
   verifyPassword: String;

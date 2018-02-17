@@ -1,7 +1,7 @@
 <nav class="navbar navbar-fixed-top navbar-light bg-primary">
   <div class="col-xs-5 hidden-xs">
     <div class="navbar-text pull-left">
-      <a [routerLink]="['/#']" class="navbar-link text-white">
+      <a routerLink="/user/{{userId}}/website" class="navbar-link text-white">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
     </div>
@@ -16,14 +16,14 @@
   </div>
   <div class="col-xs-7">
     <div class="navbar-text pull-left visible-xs">
-      <a [routerLink]="['/#']" class="navbar-link text-white">
+      <a routerLink="/user/{{userId}}/website/" class="navbar-link text-white">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
     </div>
     <div class="text-white navbar-brand font-weight-bold" [routerLink]="['/#']">
       New Website
     </div>
-    <a [routerLink]="['/website-list']" class="navbar-link navbar-text pull-right text-white">
+    <a (click)="createWebsite(newWebsite)" class="navbar-link navbar-text pull-right text-white">
       <span class="glyphicon glyphicon-ok"></span>
     </a>
 
@@ -31,7 +31,15 @@
 </nav>
 
 <div class="col-xs-4 hidden-xs cl-body-padding cl-full-height">
-  <div class="row extra-padding">
+
+  <div *ngFor="let website of websites" class="row extra-padding">
+    <a class="cl-left-padding" routerLink="/user/{{userId}}/website/{{website._id}}/page">{{website.name}}</a>
+    <a class="pull-right" routerLink="/user/{{userId}}/website/{{website._id}}">
+      <i class="glyphicon glyphicon-cog text-primary"></i>
+    </a>
+  </div>
+
+  <!-- <div class="row extra-padding">
     <a class="cl-left-padding" [routerLink]="['/page-list']">Blogging App</a>
     <a class="pull-right" [routerLink]="['/website-edit']">
       <i class="glyphicon glyphicon-cog text-primary"></i>
@@ -54,7 +62,7 @@
     <a class="pull-right" [routerLink]="['/website-edit']">
       <i class="glyphicon glyphicon-cog text-primary"></i>
     </a>
-  </div>
+  </div> -->
 </div>
 
 <div class="col-xs-1 hidden-xs cl-full-height cl-right-divider"></div>
@@ -62,18 +70,18 @@
 <div class="col-xs-7 cl-body-padding">
   <form>
     <div class="form-group">
-      <label for="website-name">Name</label>
-      <input type="text" class="form-control" id="website-name" placeholder="Name">
+      <label for="name">Name</label>
+      <input [(ngModel)]="newWebsite.name" type="text" class="form-control" name="name" placeholder="Name" ngModel required>
     </div>
     <div class="form-group">
-      <label for="website-description">Description</label>
-      <textarea id="website-description" class="form-control" rows="5" placeholder="Description"></textarea>
+      <label for="description">Description</label>
+      <textarea [(ngModel)]="newWebsite.description" name="description" class="form-control" rows="5" placeholder="Description"></textarea>
     </div>
   </form>
 </div>
 
 <nav class="navbar navbar-fixed-bottom navbar-light bg-primary">
-  <a class="navbar-brand pull-right" [routerLink]="['/profile']">
+  <a class="navbar-brand pull-right" routerLink="/user/{{userId}}">
     <i class="glyphicon glyphicon-user text-white"></i>
   </a>
 </nav>

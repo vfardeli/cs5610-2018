@@ -11,7 +11,7 @@ export class UserService {
 
     constructor() { }
 
-    users = [
+    users: User[] = [
         { _id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder" },
         { _id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley" },
         { _id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia" },
@@ -28,8 +28,9 @@ export class UserService {
     };
 
     createUser(user: any) {
-        user._id = Math.random();
+        user._id = Math.random().toString();
         this.users.push(user);
+        console.log(this.users);
     }
 
     findUserById(userId: String) {
