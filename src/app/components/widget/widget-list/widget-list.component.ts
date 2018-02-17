@@ -36,6 +36,8 @@ export class WidgetListComponent implements OnInit {
   }
 
   photoURL(url) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    var embedUrl = url.replace("youtu.be", "youtube.com/embed");
+    console.log(embedUrl);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
   }
 }
