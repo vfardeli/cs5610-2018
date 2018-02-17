@@ -26,6 +26,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit() { }
 
   register() {
+    this.errorFlag = false;
+    this.errorFlag = false;
     this.username = this.registerForm.value.username;
     this.password = this.registerForm.value.password;
     this.verifyPassword = this.registerForm.value.verifyPassword;

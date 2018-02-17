@@ -695,6 +695,8 @@ var RegisterComponent = /** @class */ (function () {
     }
     RegisterComponent.prototype.ngOnInit = function () { };
     RegisterComponent.prototype.register = function () {
+        this.errorFlag = false;
+        this.errorFlag = false;
         this.username = this.registerForm.value.username;
         this.password = this.registerForm.value.password;
         this.verifyPassword = this.registerForm.value.verifyPassword;
