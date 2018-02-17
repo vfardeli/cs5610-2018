@@ -1490,7 +1490,6 @@ var WidgetListComponent = /** @class */ (function () {
     };
     WidgetListComponent.prototype.photoURL = function (url) {
         var embedUrl = url.replace("youtu.be", "youtube.com/embed");
-        console.log(embedUrl);
         return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
     };
     WidgetListComponent = __decorate([
