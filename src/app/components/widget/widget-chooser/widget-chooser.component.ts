@@ -3,6 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { WidgetService } from '../../../services/widget.service.client';
 import { Widget } from '../../../models/widget.model.client';
+import { UserService } from '../../../services/user.service.client';
+import { WebsiteService } from '../../../services/website.service.client';
+import { PageService } from '../../../services/page.service.client';
+import { Page } from '../../../models/page.model.client';
+import { Website } from '../../../models/website.model.client';
 
 @Component({
   selector: 'app-widget-chooser',
@@ -17,16 +22,35 @@ export class WidgetChooserComponent implements OnInit {
 
   constructor(
     private widgetService: WidgetService, 
+    private userService: UserService,
+    private websiteService: WebsiteService,
+    private pageService: PageService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
-      (params: any) => {
-        this.userId = params['uid'];
-        this.websiteId = params['uid'];
-        this.pageId = params['pid'];
+      params => {
+        this.pageService.findPageById(params.pid).subscribe(
+          (page: Page) => {
+            if (page.websiteId === params.wid) {
+              this.websiteService.findWebsiteById(page.websiteId).subscribe(
+                (website: Website) => {
+                  if (website.developerId === params.uid) {
+                    this.userId = params.uid;
+                    this.websiteId = params.wid;
+                    this.pageId = params.pid;
+                  } else {
+                    console.log("User ID does not match.");
+                  }
+                }
+              );
+            } else {
+              console.log("Website ID does not match.");
+            }
+          }
+        );
       }
     );
   }
@@ -35,8 +59,14 @@ export class WidgetChooserComponent implements OnInit {
     let newWidget: Widget = {
       _id: "", widgetType: widgetType, pageId: "", size: "1", text: "text", url: "url", width: "100%"
     }
-    this.widgetService.createWidget(this.pageId, newWidget);
-    let url: any = "/user/" + this.userId + "/website/" + this.websiteId + "/page/" + this.pageId + "/widget/" + newWidget._id;
-    this.router.navigate([url]); 
+    this.widgetService.createWidget(this.pageId, newWidget).subscribe(
+      (widget: Widget) => {
+        let url: any = "/user/" + this.userId + "/website/" + this.websiteId + "/page/" + this.pageId + "/widget/" + widget._id;
+        this.router.navigate([url]); 
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 }

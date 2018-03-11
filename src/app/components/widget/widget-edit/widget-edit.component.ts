@@ -4,6 +4,11 @@ import { NgSwitch } from '@angular/common';
 
 import { WidgetService } from '../../../services/widget.service.client';
 import { Widget } from '../../../models/widget.model.client';
+import { PageService } from '../../../services/page.service.client';
+import { WebsiteService } from '../../../services/website.service.client';
+import { UserService } from '../../../services/user.service.client';
+import { Page } from '../../../models/page.model.client';
+import { Website } from '../../../models/website.model.client';
 
 @Component({
   selector: 'app-widget-edit',
@@ -16,25 +21,51 @@ export class WidgetEditComponent implements OnInit {
   websiteId: String;
   pageId: String;
   widgetId: String;
-  widget: Widget;
+  widget: Widget = {
+    _id: "", widgetType: "", pageId: "", size: "", text: "", url: "", width: ""
+  };
 
   constructor(
-    private widgetService: WidgetService, 
+    private widgetService: WidgetService,
+    private pageService: PageService,
+    private websiteService: WebsiteService,
+    private userService: UserService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
-      (params: any) => {
-        this.userId = params['uid'];
-        this.websiteId = params['uid'];
-        this.pageId = params['pid'];
-        this.widgetId = params['wgid'];
+      params => {
+        this.widgetService.findWidgetById(params.wgid).subscribe(
+          (widget: Widget) => {
+            if (widget.pageId === params.pid) {
+              this.pageService.findPageById(widget.pageId).subscribe(
+                (page: Page) => {
+                  if (page.websiteId === params.wid) {
+                    this.websiteService.findWebsiteById(page.websiteId).subscribe(
+                      (website: Website) => {
+                        if (website.developerId === params.uid) {
+                          this.userId = params.uid;
+                          this.websiteId = params.wid;
+                          this.pageId = params.pid;
+                          this.widgetId = params.wgid;
+                          this.widget = widget;
+                        } else {
+                          console.log("User ID does not match.");
+                        }
+                      }
+                    );
+                  } else {
+                    console.log("Website ID does not match.");
+                  }
+                }
+              );
+            }
+          }
+        );
       }
     );
-
-    this.widget = this.widgetService.findWidgetById(this.widgetId);
   }
 
 }

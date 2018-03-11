@@ -25,6 +25,7 @@ import { WidgetImageComponent } from './components/widget/widget-edit/widget-ima
 import { WidgetYoutubeComponent } from './components/widget/widget-edit/widget-youtube/widget-youtube.component';
 import { WidgetListComponent } from './components/widget/widget-list/widget-list.component';
 import { Routing } from './app.routing';
+import { SortableDirective } from './sortable.directive';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { Routing } from './app.routing';
     WidgetHeaderComponent,
     WidgetImageComponent,
     WidgetYoutubeComponent,
-    WidgetListComponent
+    WidgetListComponent,
+    SortableDirective
   ],
   imports: [
     BrowserModule,

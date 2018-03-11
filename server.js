@@ -4,10 +4,13 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+// const serverSide = require('./assignment/app');
 const app = express();
 
-app.use(bodyParser.json());
+// serverSide(app);
+
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Point static path to dist -- For building -- REMOVE
 app.use(express.static(path.join(__dirname, 'dist')));
@@ -28,6 +31,8 @@ const server = http.createServer(app);
 
 //var serverSide = require("./server/test-mongodb/app");
 //serverSide(app);
+
+require("./assignment/app")(app);
 
 // For Build: Catch all other routes and return the index file -- BUILDING
 app.get('*', function (req, res) {
