@@ -57,7 +57,8 @@ export class WidgetChooserComponent implements OnInit {
 
   createWidget(widgetType: String) {
     let newWidget: Widget = {
-      _id: "", widgetType: widgetType, pageId: "", size: "1", text: "", url: "", width: "100%"
+      _id: "", widgetType: widgetType, name: 'name', pageId: "", size: "1", text: "", url: "", width: "100%",
+      height: 100, rows: 0, class: '', icon: '', deletable: false, formatted: false, placeholder: ''
     }
     this.widgetService.createWidget(this.pageId, newWidget).subscribe(
       (widget: Widget) => {

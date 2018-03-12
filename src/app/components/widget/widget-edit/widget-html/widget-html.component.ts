@@ -18,7 +18,8 @@ export class WidgetHtmlComponent implements OnInit {
 
   // properties
   widget: Widget = {
-    _id: "", widgetType: "", pageId: "", size: "", text: "", url: "", width: ""
+    _id: "", widgetType: "", name: '', pageId: "", size: "1", text: "", url: "", width: "100%",
+    height: 100, rows: 0, class: '', icon: '', deletable: false, formatted: false, placeholder: ''
   };
   userId: String;
   websiteId: String;
@@ -26,7 +27,7 @@ export class WidgetHtmlComponent implements OnInit {
   widgetId: String;
 
   constructor(
-    private widgetService: WidgetService, 
+    private widgetService: WidgetService,
     private pageService: PageService,
     private websiteService: WebsiteService,
     private userService: UserService,
@@ -71,6 +72,7 @@ export class WidgetHtmlComponent implements OnInit {
   updateWidget(widget: Widget) {
     this.widgetService.updateWidget(this.widgetId, widget).subscribe(
       (widget: Widget) => {
+        console.log("good");
         let url: any = "/user/" + this.userId + "/website/" + this.websiteId + "/page/" + this.pageId + "/widget";
         this.router.navigate([url]);
       },

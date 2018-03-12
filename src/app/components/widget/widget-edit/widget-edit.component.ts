@@ -22,7 +22,8 @@ export class WidgetEditComponent implements OnInit {
   pageId: String;
   widgetId: String;
   widget: Widget = {
-    _id: "", widgetType: "", pageId: "", size: "", text: "", url: "", width: ""
+    _id: "", widgetType: '', name: '', pageId: "", size: "1", text: "", url: "", width: "100%",
+      height: 100, rows: 0, class: '', icon: '', deletable: false, formatted: false, placeholder: ''
   };
 
   constructor(
