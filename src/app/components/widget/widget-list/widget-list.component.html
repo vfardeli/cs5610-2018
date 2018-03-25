@@ -65,9 +65,9 @@
       <br>
     </div>
 
-    <div class="embed-responsive embed-responsive-16by9" *ngIf="widget.type == 'YOUTUBE'">
+    <div class="embed-responsive embed-responsive-16by9 youtube-widget" *ngIf="widget.type == 'YOUTUBE'">
       <div>
-        <iframe width="{{widget.width}}" height="360" [src]="photoURL(widget.url)" frameborder="0" allowfullscreen>
+        <iframe width="{{widget.width}}" height="{{widget.height}}" [src]="photoURL(widget.url)" frameborder="0" allowfullscreen>
         </iframe>
         <a [routerLink]="['/#']" class="pull-right">
           <span class="glyphicon glyphicon-menu-hamburger" style="background-color: white"></span>
