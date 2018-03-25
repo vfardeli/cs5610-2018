@@ -2296,11 +2296,6 @@ var WidgetListComponent = /** @class */ (function () {
                             _this.pageId = params.pid;
                             _this.widgetService.findWidgetsByPageId(_this.pageId).subscribe(function (widgets) {
                                 _this.widgets = widgets;
-                                // this.widgets.forEach(function (item: any) {
-                                //   if (!item.url.startsWith("https")) {
-                                //     item.url = "http://localhost:3100/api/image/" + item.url;
-                                //   }
-                                // });
                             }, function (error) {
                                 console.log(error);
                             });
@@ -2814,8 +2809,8 @@ var SortableDirective = /** @class */ (function () {
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 var environment = {
     production: false,
-    // baseUrl : ''
-    baseUrl: 'http://localhost:3100'
+    baseUrl: ''
+    // baseUrl : 'http://localhost:3100'
 };
 
 
