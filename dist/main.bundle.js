@@ -2318,8 +2318,6 @@ var WidgetListComponent = /** @class */ (function () {
     // receiving the emitted event
     WidgetListComponent.prototype.reorderWidgets = function (indexes) {
         // call widget service function to update widget as per index
-        console.log("start: " + indexes.startIndex);
-        console.log("end: " + indexes.endIndex);
         this.widgetService.reorderWidgets(indexes.startIndex, indexes.endIndex, this.pageId)
             .subscribe(function (data) { return console.log(data); });
     };

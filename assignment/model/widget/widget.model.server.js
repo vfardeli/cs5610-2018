@@ -30,15 +30,16 @@ function updateWidget(widgetId, widget) {
 }
 
 function deleteWidget(widgetId) {
-    var foundWidget = Widget.findById(widgetId);
-    var index = foundWidget.position;
-    resetWidgets(index);
+    Widget.findById(widgetId, function (err, foundWidget) {
+        var index = foundWidget.position;
+        resetWidgets(index, foundWidget._page);
+    });
     return Widget.findByIdAndRemove(widgetId);
 }
 
-function resetWidgets(index) {
-    return Widget.find({ _page: pageId }, function (err, widgets) {
-        widget.forEach(function (widget) {
+function resetWidgets(index, pageId) {
+    Widget.find({ _page: pageId }, function (err, widgets) {
+        widgets.forEach(function (widget) {
             if (widget.position > index) {
                 widget.position--;
                 widget.save();
@@ -69,7 +70,7 @@ function reorderWidgets(pageId, start, end) {
                     }
                 }
             }
-            
+
             if (start > end) {
                 if (widget.position === start) {
                     widget.position = end;
