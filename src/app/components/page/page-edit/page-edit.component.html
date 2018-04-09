@@ -10,6 +10,11 @@
   </a>
 </nav>
 <div class="container-fluid cl-body-padding">
+
+  <div *ngIf="errorFlag" class="alert alert-danger">
+    {{errorMsg}}
+  </div>
+
   <form>
     <div class="form-group">
       <label for="name">Name</label>
@@ -21,7 +26,8 @@
     </div>
     <div class="form-group">
       <label for="description">Description</label>
-      <input [(ngModel)]="updatedPage.description" type="text" class="form-control" name="description" placeholder="Page Description" ngModel required>
+      <input [(ngModel)]="updatedPage.description" type="text" class="form-control" name="description" placeholder="Page Description"
+        ngModel required>
     </div>
     <a (click)="deletePage()" class="btn btn-block btn-danger">Delete</a>
   </form>

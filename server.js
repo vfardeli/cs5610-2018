@@ -4,8 +4,21 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const passport = require('passport');
 // const serverSide = require('./assignment/app');
 const app = express();
+
+app.use(session({
+  secret: 'S3CR3T!',
+  resave: true,
+  saveUninitialized: true
+}));
+
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // serverSide(app);
 
@@ -17,6 +30,10 @@ mongoose.createConnection(connectionString);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+// app.use(cookieParser());
+// app.use(session({ secret: 'S3CR3T!' }));
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // Point static path to dist -- For building -- REMOVE
 app.use(express.static(path.join(__dirname, 'dist')));

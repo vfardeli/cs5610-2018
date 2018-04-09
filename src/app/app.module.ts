@@ -32,6 +32,8 @@ import { WidgetTextComponent } from './components/widget/widget-edit/widget-text
 import { FlickrImageSearchComponent } from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
 import { FlickrService } from '../app/services/flickr.service.client';
 import { OrderByPipe } from './components/widget/widget-list/order-by-pipe.pipe';
+import { SharedService } from './services/shared.service';
+import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,7 @@ import { OrderByPipe } from './components/widget/widget-list/order-by-pipe.pipe'
     Routing,
     QuillEditorModule
   ],
-  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService, AuthGuard, SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

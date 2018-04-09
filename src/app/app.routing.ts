@@ -18,6 +18,8 @@ import { WidgetYoutubeComponent } from './components/widget/widget-edit/widget-y
 import { WidgetListComponent } from './components/widget/widget-list/widget-list.component';
 import { FlickrImageSearchComponent } from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
 
+import { AuthGuard } from './services/auth-guard.service';
+
 // for routing
 // for example, if the url goes to /login, then load LoginComponent
 const APP_ROUTES: Routes = [
@@ -25,7 +27,7 @@ const APP_ROUTES: Routes = [
     { path: 'default', component: LoginComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'user/:uid', component: ProfileComponent },
+    { path: 'user/:uid', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'user/:uid/website', component: WebsiteListComponent },
     { path: 'user/:uid/website/new', component: WebsiteNewComponent },
     { path: 'user/:uid/website/:wid', component: WebsiteEditComponent },
