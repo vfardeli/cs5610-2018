@@ -144,7 +144,9 @@ module.exports = function (app) {
 
     function logout(req, res) {
         req.logout();
-        res.json(true);
+        req.session.destroy(function (err) {
+            res.json(true);
+        });
     }
 
     function register(req, res) {
