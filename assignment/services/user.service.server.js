@@ -98,6 +98,7 @@ module.exports = function (app) {
                 } else {
                     var names = profile.displayNAme.split(" ");
                     var newFacebookUser = {
+                        username: 'username',
                         lastName: names[1],
                         firstNAme: names[0],
                         email: profile.emails ? profile.emails[0].value : "",
