@@ -102,7 +102,7 @@ module.exports = function (app) {
                         username: 'username',
                         password: 'password',
                         lastName: names[1],
-                        firstNAme: names[0],
+                        firstName: names[0],
                         email: profile.emails ? profile.emails[0].value : "",
                         facebook: {
                             id: profile.id,
