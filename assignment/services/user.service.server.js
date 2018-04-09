@@ -96,7 +96,7 @@ module.exports = function (app) {
                 if (user) {
                     return done(null, user);
                 } else {
-                    var names = profile.displayNAme.split(" ");
+                    var names = profile.displayName.split(" ");
                     var newFacebookUser = {
                         username: 'username',
                         lastName: names[1],
