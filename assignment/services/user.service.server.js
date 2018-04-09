@@ -26,10 +26,11 @@ module.exports = function (app) {
 
     // auth with Facebook
     app.get("/auth/facebook/callback",
-        passport.authenticate('facebook', {
-            successRedirect: '/#/profile',
-            failureRedirect: '/#/login'
-        })
+        passport.authenticate('facebook', { failureRedirect: '/login' }),
+        function (req, res) {
+            const url = 'https://valeryfardeli-webdev.herokuapp.com/user/' + req.user._id;
+            res.redirect(url);
+        }
     );
     app.get("/facebook/login", passport.authenticate('facebook', { scope: 'email' }));
 
